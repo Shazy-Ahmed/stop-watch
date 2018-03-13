@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stop-Watch</title>
+    <style>
+    
+    #s{
+        background-color: #373737;
+    }
+    .stop{
+        padding-top:140px;
+    }   
+    .watch{
+        width: 400px;
+        height: 400px;
+        border: 8px solid #c0b283;
+        border-radius:7px;
+        padding: 40px;
+        background-color: #dcd0c0;
+    }
+    .watch button{
+        padding: 14px;
+        font-size: 2em;
+        color: #f4f4f4;
+        background-color: #c0b283;
+        border-color:#373737;
+    }
+    .h{
+        font-family: "Monotype Corsiva";
+        font-size: 4em;
+        color:#f4f4f4;
+    }
+    #timer{
+        font-size: 4em;
+        color: #f4f4f4;
+    }
+    #nick{
+        text-align: center;
+        font-family: "Monotype Corsiva";
+        color: #c0b283;
+    }
+    </style>
+</head>
+<body id="s">
+    <div align="center" class="stop">
+    <div  class="watch">
+
+        <h1 class="h">Stop Watch</h1><br>
+   <h1 id="timer">0:0:0</h1><br><br>
+
+    <button class="btn btn-success" id="start" onclick="start();">Start</button>
+
+    <button id="stop" class="btn btn-info"  onclick="stop()"> Stop</button>
+    
+    <button id="reset"  class="btn btn-primary"   onclick="reset();" > Reset</button>
+
+
+</div>
+</div>
+<h1 id="nick">Shazy</h1>
+<script>
+    var min=0;
+    var sec =0;
+    var miliSec=0;
+    var timer;
+
+    function callTimer(){
+        miliSec++;
+        if(miliSec<100)
+        {
+            if(miliSec==99)
+            {
+                miliSec=0;
+                sec++;
+                if(sec===60)
+                {
+                    sec=0;
+                    min++;
+                }
+            }
+        }
+        else
+        {
+            miliSec=0;
+        }
+        document.getElementById('timer').innerHTML=min +":"+sec+":"+miliSec;
+    }
+function  start()
+{
+    
+timer=setInterval(callTimer,10);
+document.getElementById('start').disabled= true;
+}
+function stop()
+{
+    document.getElementById('start').disabled = false;
+    clearInterval(timer);
+}
+function reset()
+{clearInterval(timer);
+    document.getElementById('timer').innerHTML= 0+" : " +0+" : " +0;
+min=0;sec=0;miliSec=0;
+}
+   
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</body>
+</html>
